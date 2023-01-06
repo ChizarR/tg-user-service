@@ -1,0 +1,25 @@
+version: "3.3"
+
+services:
+
+  postgres:
+    restart: always
+    image: postgres:15.1
+    env_file:
+      - .env
+    environment:
+      POSTGRES_DB: "${PG_DB}"
+      POSTGRES_USER: "${PG_USER}"
+      POSTGRES_PASSWORD: "${PG_PASS}"
+    ports:
+      - 5432:5432
+  
+  user_api:
+    restart: always
+    build: .
+    env_file:
+      - .env
+    environment:
+      CONNECTION_STRING: "${CONNECTION_STRING}"
+    ports:
+      - 5050:5050

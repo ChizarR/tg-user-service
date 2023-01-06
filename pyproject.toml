@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "user-api"
+version = "0.1.0"
+description = ""
+authors = ["ChizarR <chizarr27@gmail.com>"]
+readme = "README.md"
+packages = [{include = "user_api"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.88.0"
+uvicorn = "^0.20.0"
+tortoise-orm = "^0.19.2"
+asyncpg = "^0.27.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
