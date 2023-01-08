@@ -3,7 +3,7 @@ from enum import Enum
 from logging import Logger
 from typing import List
 
-from user_api.dao import UserDAO
+from user_api.dao.user_dao import UserDAOInterface
 from user_api.database.helpers import MailingType
 from user_api.database.models.user import User
 from user_api.views import UserView
@@ -19,9 +19,9 @@ class CountParams(Enum):
 
 
 class UserService:
-    def __init__(self, logger: Logger) -> None:
+    def __init__(self, logger: Logger, user_dao: UserDAOInterface) -> None:
         # Data Access Object for User Model
-        self.__user_dao = UserDAO()
+        self.__user_dao = user_dao
 
         self._log = logger
 

@@ -37,7 +37,7 @@ class UserDAOInterface:
 
     @staticmethod
     @abstractstaticmethod
-    async def delete(user_id: int) -> None:
+    async def delete(user_id: int) -> User:
         raise NotImplementedError("Delete is not implemented")
 
     @staticmethod

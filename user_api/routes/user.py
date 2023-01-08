@@ -3,6 +3,7 @@ from typing import Dict
 
 from fastapi.routing import APIRouter
 
+from user_api.dao import UserDAO
 from user_api.dao.exceptions import NoSuchUser
 from user_api.views import UserView
 from user_api.services import UserService
@@ -15,7 +16,7 @@ class UserRouter:
         self.register_routers()
         
         self._log = logger 
-        self.__u_service = UserService(self._log)
+        self.__u_service = UserService(self._log, UserDAO())
 
     def register_routers(self) -> None:
         self._router.add_api_route("/get", self.get_all_users, methods=["GET"], status_code=200)
