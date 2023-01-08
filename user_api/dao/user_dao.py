@@ -52,7 +52,7 @@ class UserDAO(UserDAOInterface):
         user = await User.get_or_none(tg_id=tg_id)
 
         if user is None:
-            raise ex.NoSuchUser(f"Can't find user with tg_id: {tg_id}")
+            raise ex.NoSuchUserError(f"Can't find user with tg_id: {tg_id}")
 
         return user
 

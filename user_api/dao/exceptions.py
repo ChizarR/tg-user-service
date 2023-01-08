@@ -1,2 +1,2 @@
-class NoSuchUser(Exception):
+class NoSuchUserError(Exception):
     pass

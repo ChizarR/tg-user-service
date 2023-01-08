@@ -4,7 +4,7 @@ from typing import Dict
 from fastapi.routing import APIRouter
 
 from user_api.dao import UserDAO
-from user_api.dao.exceptions import NoSuchUser
+from user_api.dao.exceptions import NoSuchUserError
 from user_api.views import UserView
 from user_api.services import UserService
 from user_api.helpers import rest_helpers as rest
@@ -51,7 +51,7 @@ class UserRouter:
             user = await self.__u_service.get_user(tg_id)
             r = rest.ApiResponse(status=rest.ApiResponseStatus.OK, message=f"User {tg_id}", result=user)
             return r.to_dict()
-        except NoSuchUser as e:
+        except NoSuchUserError as e:
             self._log.info(e)
             r = rest.ApiResponse(status=rest.ApiResponseStatus.NO_CONTENT)
             return r.to_dict()
