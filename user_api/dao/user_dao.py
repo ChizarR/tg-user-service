@@ -12,7 +12,7 @@ from user_api.views import UserView
 class UserDAOInterface:
     @staticmethod
     @abstractstaticmethod
-    async def get(tg_id: int) -> User:
+    async def get_by_tg_id(tg_id: int) -> User:
         raise NotImplementedError("Get is not implemented")
 
     @staticmethod
@@ -48,7 +48,7 @@ class UserDAOInterface:
 
 class UserDAO(UserDAOInterface):
     @staticmethod
-    async def get(tg_id: int) -> User:
+    async def get_by_tg_id(tg_id: int) -> User:
         user = await User.get_or_none(tg_id=tg_id)
 
         if user is None:

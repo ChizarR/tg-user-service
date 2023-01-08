@@ -78,8 +78,8 @@ class UserService:
 
         return res
 
-    async def get_user(self, user_id: int) -> UserView:
-        user = await self.__user_dao.get(user_id)
+    async def get_user_by_tg_id(self, user_id: int) -> UserView:
+        user = await self.__user_dao.get_by_tg_id(user_id)
         view = _user_model_to_view(user)
         return view
     
@@ -120,13 +120,13 @@ class UserService:
         return view
 
     async def modify_user(self, user: UserView) -> UserView:
-        current_user = await self.__user_dao.get(user.tg_id)
+        current_user = await self.__user_dao.get_by_tg_id(user.tg_id)
         updated_user = await self.__user_dao.update(current_user, user.dict())
         view = _user_model_to_view(updated_user)
         return view
 
     async def update_last_activity_date(self, user_id: int) -> UserView:
-        user = await self.__user_dao.get(user_id)
+        user = await self.__user_dao.get_by_tg_id(user_id)
         updated_user = await self.__user_dao.update(user, {
             "last_activity_date": date.today(),
             "is_active": True
@@ -135,13 +135,13 @@ class UserService:
         return view
 
     async def update_mailing_type(self, user_tg_id: int, mailing_type: str) -> UserView:
-        user = await self.__user_dao.get(user_tg_id)
+        user = await self.__user_dao.get_by_tg_id(user_tg_id)
         updated_user = await self.__user_dao.update(user, {"mailing_type": mailing_type})
         view = _user_model_to_view(updated_user)
         return view
 
     async def delete(self, user_id: int) -> UserView:
-        user = await self.__user_dao.get(user_id)
+        user = await self.__user_dao.get_by_tg_id(user_id)
         deleted_user = await self.__user_dao.delete(user)
         view = _user_model_to_view(deleted_user)
         return view
