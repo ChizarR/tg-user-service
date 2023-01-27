@@ -10,8 +10,8 @@ from user_api.views import UserView
 
 
 class UserDAOInterface:
-    @staticmethod
     @abstractstaticmethod
+    @staticmethod
     async def get_by_tg_id(tg_id: int) -> User:
         raise NotImplementedError("Get is not implemented")
 
